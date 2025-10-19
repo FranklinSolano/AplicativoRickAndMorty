@@ -15,8 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let vc: LoginViewController = LoginViewController()
+        let vc: RegisterViewController = RegisterViewController()
         let navVC = UINavigationController(rootViewController: vc)
+        navVC.setNavigationBarHidden(true, animated: false)
         window.rootViewController = navVC
         window.makeKeyAndVisible()
         self.window = window

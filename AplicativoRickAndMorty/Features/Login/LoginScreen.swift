@@ -10,7 +10,7 @@ import UIKit
 final class LoginScreen: UIView {
     
     private lazy var imageBackGroud: ImageViewing = DSImageViewAdapter(image: UIImage(named: "imageLogin"))
-    private lazy var emnailLabel: Labeling = DSLLabelAdapter()
+    private lazy var emailLabel: Labeling = DSLLabelAdapter()
     private lazy var emailTextField: TextFielding = DSTextFieldAdapter()
     private lazy var passwordLabel: Labeling = DSLLabelAdapter()
     private lazy var passwordTextField: TextFielding = DSTextFieldAdapter()
@@ -28,7 +28,7 @@ final class LoginScreen: UIView {
     }
     
     private func configLabel() {
-        emnailLabel.setDTO(with: .init(text: "Email:"))
+        emailLabel.setDTO(with: .init(text: "Email:"))
         
         passwordLabel.setDTO(with: .init(text: "Password:"))
         
@@ -60,14 +60,7 @@ final class LoginScreen: UIView {
 
 extension LoginScreen: ViewCodeProtocol {
     func configElements() {
-        addSubview(imageBackGroud)
-        addSubview(emnailLabel)
-        addSubview(emailTextField)
-        addSubview(passwordLabel)
-        addSubview(passwordTextField)
-        addSubview(forgotPasswordButton)
-        addSubview(loginButton)
-        addSubview(registerButton)
+        [imageBackGroud, emailLabel, emailTextField, passwordLabel, passwordTextField, forgotPasswordButton, loginButton, registerButton].forEach(addSubview)
     }
     
     func configConstraints() {
@@ -78,16 +71,16 @@ extension LoginScreen: ViewCodeProtocol {
             imageBackGroud.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageBackGroud.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            emnailLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,constant: 60),
-            emnailLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 20),
+            emailLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,constant: 60),
+            emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 20),
             
-            emailTextField.topAnchor.constraint(equalTo: emnailLabel.bottomAnchor, constant: 10),
+            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 10),
             emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 25),
             emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25),
             emailTextField.heightAnchor.constraint(equalToConstant: 50),
             
             passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor,constant: 20),
-            passwordLabel.leadingAnchor.constraint(equalTo: emnailLabel.leadingAnchor),
+            passwordLabel.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
             
             passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 10),
             passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
@@ -99,7 +92,7 @@ extension LoginScreen: ViewCodeProtocol {
             
             loginButton.topAnchor.constraint(equalTo: forgotPasswordButton.bottomAnchor,constant: 80),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
-            loginButton.widthAnchor.constraint(equalToConstant: 300),
+            loginButton.widthAnchor.constraint(equalToConstant: 190),
             loginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             registerButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,constant: -15),
