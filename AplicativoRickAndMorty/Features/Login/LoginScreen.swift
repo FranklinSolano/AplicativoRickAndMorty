@@ -9,76 +9,58 @@ import UIKit
 
 final class LoginScreen: UIView {
     
-    
-    lazy var emnailLabel: UILabel = {
-       let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Email:"
-        label.textColor = .white
-        return label
-    }()
-    
-    lazy var emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Digite seu email"
-        textField.backgroundColor = .white
-        return textField
-    }()
-    
-    lazy var passwordLabel: UILabel = {
-       let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Password:"
-        label.textColor = .white
-        return label
-    }()
-    
-    lazy var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Digite sua senha:"
-        textField.backgroundColor = .white
-        return textField
-    }()
-    
-    lazy var forgotPasswordButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Esqueceu sua senha?", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
-    
-    lazy var loginButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Login", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        button.backgroundColor = .white
-       return button
-    }()
-    
-    lazy var registerButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Nao tem conta? Registra-se?", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
+    private lazy var imageBackGroud: ImageViewing = DSImageViewAdapter(image: UIImage(named: "imageLogin"))
+    private lazy var emnailLabel: Labeling = DSLLabelAdapter()
+    private lazy var emailTextField: TextFielding = DSTextFieldAdapter()
+    private lazy var passwordLabel: Labeling = DSLLabelAdapter()
+    private lazy var passwordTextField: TextFielding = DSTextFieldAdapter()
+    private lazy var forgotPasswordButton: Buttoning = DSButtonTitlesAdapter()
+    private lazy var loginButton:Buttoning = DSButtonAdapter()
+    private lazy var registerButton:Buttoning = DSButtonTitlesAdapter()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .blue
-        configElements()
-        configConstraintd()
+        configSetup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configElements(){
+    private func configLabel() {
+        emnailLabel.setDTO(with: .init(text: "Email:"))
+        
+        passwordLabel.setDTO(with: .init(text: "Password:"))
+        
+    }
+    
+    private func configTextField(){
+        emailTextField.setDTO(.init(placeholder: "Digite seu email", isSecureText: false))
+        passwordTextField.setDTO(.init(placeholder: "Digite seu email", isSecureText: true))
+    }
+    
+    private func configButton(){
+        forgotPasswordButton.setDTO(.init(title: "Esquceu a senha?", isEnable: true, font: UIFont.systemFont(ofSize: 16)))
+        forgotPasswordButton.onClick {
+            //acaobutton
+        }
+        
+        loginButton.setDTO(.init(title: "Login", isEnable: true, font: UIFont.systemFont(ofSize: 16)))
+        loginButton.onClick {
+            //acaobutton
+        }
+        
+        registerButton.setDTO(.init(title: "Nao tem conta? Registra-se?", isEnable: true, font: UIFont.systemFont(ofSize: 16)))
+        registerButton.onClick {
+            //acaobutton
+        }
+    }
+    
+}
+
+extension LoginScreen: ViewCodeProtocol {
+    func configElements() {
+        addSubview(imageBackGroud)
         addSubview(emnailLabel)
         addSubview(emailTextField)
         addSubview(passwordLabel)
@@ -88,8 +70,13 @@ final class LoginScreen: UIView {
         addSubview(registerButton)
     }
     
-    private func configConstraintd(){
+    func configConstraints() {
         NSLayoutConstraint.activate([
+            
+            imageBackGroud.topAnchor.constraint(equalTo: topAnchor),
+            imageBackGroud.bottomAnchor.constraint(equalTo: bottomAnchor),
+            imageBackGroud.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageBackGroud.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             emnailLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,constant: 60),
             emnailLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 20),
@@ -117,10 +104,14 @@ final class LoginScreen: UIView {
             
             registerButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,constant: -15),
             registerButton.centerXAnchor.constraint(equalTo: centerXAnchor)
-            
-            
         ])
     }
     
-    
+    func configadditionalConfiguration() {
+        backgroundColor = .clear
+        configLabel()
+        configTextField()
+        configButton()
+    }
 }
+
