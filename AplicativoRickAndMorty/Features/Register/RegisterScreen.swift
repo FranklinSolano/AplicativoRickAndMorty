@@ -7,7 +7,17 @@
 
 import UIKit
 
+protocol RegisterScreenProtocol: AnyObject {
+    func actionBackButton()
+    func actionRegisterButton()
+}
+
 final class RegisterScreen: UIView {
+    
+    weak var delegate: RegisterScreenProtocol?
+    func delegate(delegate: RegisterScreenProtocol){
+        self.delegate = delegate
+    }
     
     private lazy var imageBackGroud: ImageViewing = DSImageViewAdapter(image: UIImage(named: "imageRegister"))
     private lazy var backButton: Buttoning = DSButtonTitlesAdapter()
@@ -47,12 +57,12 @@ final class RegisterScreen: UIView {
     private func configButton() {
         backButton.setDTO(.init(title: "Back <-", isEnable: true, font: DSFonts.titleBold18))
         backButton.onClick {
-            
+            self.delegate?.actionBackButton()
         }
         
         registerButton.setDTO(.init(title: "Register", isEnable: true, font: DSFonts.titleBold18))
         registerButton.onClick {
-            
+            self.delegate?.actionRegisterButton()
         }
     }
     

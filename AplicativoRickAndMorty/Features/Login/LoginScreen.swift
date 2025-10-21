@@ -7,7 +7,19 @@
 
 import UIKit
 
+protocol LoginScreenProtocol: AnyObject {
+    func actionRegisterButton()
+    func actionForgotPasswordButton()
+    func actionHomeButton()
+}
+
 final class LoginScreen: UIView {
+    
+    weak var delegate: LoginScreenProtocol?
+    func delegate(delegate: LoginScreenProtocol){
+        self.delegate = delegate
+    }
+    
     
     private lazy var imageBackGroud: ImageViewing = DSImageViewAdapter(image: UIImage(named: "imageLogin"))
     private lazy var emailLabel: Labeling = DSLLabelAdapter()
@@ -42,17 +54,17 @@ final class LoginScreen: UIView {
     private func configButton(){
         forgotPasswordButton.setDTO(.init(title: "Esquceu a senha?", isEnable: true, font: UIFont.systemFont(ofSize: 16)))
         forgotPasswordButton.onClick {
-            //acaobutton
+            self.delegate?.actionForgotPasswordButton()
         }
         
         loginButton.setDTO(.init(title: "Login", isEnable: true, font: UIFont.systemFont(ofSize: 16)))
         loginButton.onClick {
-            //acaobutton
+            self.delegate?.actionHomeButton()
         }
         
         registerButton.setDTO(.init(title: "Nao tem conta? Registra-se?", isEnable: true, font: UIFont.systemFont(ofSize: 16)))
         registerButton.onClick {
-            //acaobutton
+            self.delegate?.actionRegisterButton()
         }
     }
     

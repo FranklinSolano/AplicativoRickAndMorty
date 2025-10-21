@@ -1,5 +1,5 @@
 //
-//  RegisterViewController.swift
+//  ForgotPassrodViewController.swift
 //  AplicativoRickAndMorty
 //
 //  Created by Franklin  Stilhano Solano on 19/10/25.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class ForgotPassrodViewController: UIViewController {
     
-    var screen: RegisterScreen?
+    var screen: ForgotPassrodScreen?
     
     override func loadView() {
-        screen = RegisterScreen()
+        screen = ForgotPassrodScreen()
         view = screen
         screen?.delegate(delegate: self)
     }
@@ -23,13 +23,14 @@ class RegisterViewController: UIViewController {
 
 }
 
-extension RegisterViewController: RegisterScreenProtocol {
+
+extension ForgotPassrodViewController: ForgotPassrodProtocol {
     func actionBackButton() {
         navigationController?.popViewController(animated: true)
     }
     
-    func actionRegisterButton() {
-        // navegacao para tabbar
+    func actionForgotPasswordButton() {
+        //navegacao para login
     }
     
     
