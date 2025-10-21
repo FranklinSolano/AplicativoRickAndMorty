@@ -7,9 +7,23 @@
 
 import UIKit
 
+protocol LoginViewControllerDisplay: AnyObject{
+    
+}
+
 class LoginViewController: UIViewController {
     
     var screen: LoginScreen?
+    let interactor: LoginInteracting?
+    
+    init(interactor: LoginInteracting?) {
+        self.interactor = interactor
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         screen = LoginScreen()
@@ -26,8 +40,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: LoginScreenProtocol {
     func actionRegisterButton() {
-        var vc = RegisterViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        interactor?.navigationRegisterInteractor()
     }
     
     func actionForgotPasswordButton() {
@@ -40,5 +53,9 @@ extension LoginViewController: LoginScreenProtocol {
 //        navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+}
+
+extension LoginViewController: LoginViewControllerDisplay {
     
 }
